@@ -104,7 +104,7 @@ import_headers = CSV.open("O365_import_template.csv").first
 output = CSV.open(import_file, "wb")
 output << import_headers
 
-CSV.foreach(export_file, headers: true) do |contact|
+CSV.foreach(export_file, encoding: "ISO-8859-1:UTF-8", headers: true) do |contact|
   # new_contact = CSV::Row.new(import_headers, [])
   contact.delete_if {|header, field| unique_to_cms.include? header}
   output << contact
