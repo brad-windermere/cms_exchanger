@@ -4,79 +4,6 @@ require 'optparse'
 require 'csv'
 require 'active_support/core_ext/hash/slice'
 
-# o365 doesn't care about header case, so "Business street", "Home street", & "Web page" are fine
-# "E-mail Address" would need to be changed to "E-mail" though 
-unique_to_o365 = ["Business street", "Home street", "E-mail", "Web page"]
-
-# unique_to_cms = ["Business Street",
-#  "Business Street 3",
-#  "Home Street",
-#  "Home Street 3",
-#  "Other Street 3",
-#  "Car Phone",
-#  "ISDN",
-#  "Account",
-#  "Anniversary",
-#  "Billing Information",
-#  "Birthday",
-#  "Directory Server",
-#  "E-mail Address",
-#  "Gender",
-#  "Government ID Number",
-#  "Hobby",
-#  "Initials",
-#  "Internet Free Busy",
-#  "Keywords",
-#  "Language",
-#  "Location",
-#  "Mileage",
-#  "Organizational ID Number",
-#  "Priority",
-#  "Private",
-#  "Profession",
-#  "Referred By",
-#  "Sensitivity",
-#  "Spouse",
-#  "User 1",
-#  "User 2",
-#  "User 3",
-#  "User 4",
-#  "Web Page"]
-
-# test this out without changing "Business street", "Home street", or "Web page"
-# will need to change "E-mail Address" to "Email" once done running
-# test to see if the case matters for those columns (it shouldn't)
-unique_to_cms = ["Business Street 3",
- "Home Street 3",
- "Other Street 3",
- "Car Phone",
- "ISDN",
- "Account",
- "Anniversary",
- "Billing Information",
- "Birthday",
- "Directory Server",
- "Gender",
- "Government ID Number",
- "Hobby",
- "Initials",
- "Internet Free Busy",
- "Keywords",
- "Language",
- "Location",
- "Mileage",
- "Organizational ID Number",
- "Priority",
- "Private",
- "Profession",
- "Referred By",
- "Sensitivity",
- "Spouse",
- "User 1",
- "User 2",
- "User 3",
- "User 4"]
-
 # configure command line options
 # more will go here eventually
 options = {}
@@ -104,8 +31,13 @@ import_headers = CSV.open("O365_import_template.csv").first
 output = CSV.open(import_file, "wb")
 output << import_headers
 
+# this csv has mappings between cms -> exhange fields
+mapping = CSV.open('field_mapping.csv', headers: true).read
+
 CSV.foreach(export_file, encoding: "ISO-8859-1:UTF-8", headers: true) do |contact|
-  # new_contact = CSV::Row.new(import_headers, [])
-  contact.delete_if {|header, field| unique_to_cms.include? header}
-  output << contact
+  new_contact = CSV::Row.new(import_headers, [])
+  mapping.each do |column|
+    new_contact[ column["Exchange Column"] ] = "#{ contact[ column['CMS DB Column'] ] }".strip # get rid of fields with nothing but blank space
+  end
+  output << new_contact
 end
