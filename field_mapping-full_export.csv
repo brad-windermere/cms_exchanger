@@ -1,0 +1,63 @@
+Index,Exchange Column,CMS DB Column,Notes,Unused
+0,Title,,,salutation
+1,First Name,firstname,,cm_firstname
+2,Middle Name,,,cm_lastname
+3,Last Name,lastname,,dob
+4,Suffix,,,cm_dob
+5,Company,company,,cm_homephone
+6,Department,,,cm_workphone
+7,Job Title,com_name,,cm_mobilephone
+8,Business street,com_address,,cm_email
+9,Business Street 2,,,entrydate
+10,Business City,com_city,,client_type
+11,Business State,com_state,,wedanniversary
+12,Business Postal Code,com_zip,,dist_meth_1
+13,Business Country,,,dist_meth_2
+14,Home street,street,add hsn,dist_meth_3
+15,Home Street 2,,,dist_meth_4
+16,Home City,city,,dist_meth_5
+17,Home State,state,,trans
+18,Home Postal Code,zip,need to add zip_4,zip1 (exactly the same data as zip)
+19,Home Country,country,,active
+20,Other Street,street2,need to add hsn2,cntc_how
+21,Other Street 2,,,tran_st
+22,Other City,city2,,"ln (there is no input field for this, looks like email dsiplay name)"
+23,Other State,state2,,source_id
+24,Other Postal Code,zip2,add zip_42,source_explain
+25,Other Country,country2,,purchasedate
+26,Assistant's Phone,,,client_type_2
+27,Business Fax,com_fax,,client_type_3
+28,Business Phone,workphone,,client_type_4
+29,Business Phone 2,,,client_type_5
+30,Callback,,,LastTransDate
+31,Company Main Phone,com_phone,,homepage
+32,Home Fax,,,
+33,Home Phone,,,
+34,Home Phone 2,,,
+35,Mobile Phone,mobilephone,,
+36,Other Fax,,,
+37,Other Phone,,,
+38,Pager,,,
+39,Primary Phone,homephone,,
+40,Radio Phone,,,
+41,TTY/TDD Phone,,,
+42,Telex,,,
+43,Assistant's Name,,,
+44,Business Address PO Box,,,
+45,Categories,,,
+46,Children,,,
+47,E-mail,email,,
+48,E-mail Type,,,
+49,E-mail Display Name,,,
+50,E-mail 2 Address,,,
+51,E-mail 2 Type,,,
+52,E-mail 2 Display Name,,,
+53,E-mail 3 Address,,,
+54,E-mail 3 Type,,,
+55,E-mail 3 Display Name,,,
+56,Home Address PO Box,,,
+57,Manager's Name,,,
+58,Notes,sp_note,,
+59,Office Location,,,
+60,Other Address PO Box,,,
+61,Web page,,,
