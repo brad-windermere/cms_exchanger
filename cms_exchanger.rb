@@ -2,13 +2,11 @@
 
 require 'optparse'
 require 'csv'
-require 'active_support/core_ext/hash/slice'
 
 # configure command line options
-# more will go here eventually
 options = {}
 optparse = OptionParser.new do|opts|
-  opts.banner = "cms_exchanger: translate CMS export files to Office 365 format\n
+  opts.banner = "cms_exchanger: translate CMS export files to Office 365 format
   Usage: top_exchanger inputfile [outputfile]"
   opts.on( '-h', '--help', 'Display this screen' ) do
      puts opts
@@ -22,8 +20,7 @@ if ARGV.empty?
   exit(-1)
 end
 export_file = ARGV.shift # this is the the export file we're going to translate
-import_file = ARGV.shift # this is the translated file we're going to ouput
-import_file = "O365_import_file.csv" if !import_file # should use =|| here instead
+import_file = ARGV.shift || "O365_import_file.csv" # this is the translated file we're going to ouput
 
 # get headers from the import template
 import_headers = CSV.open("O365_import_template.csv").first
@@ -32,8 +29,7 @@ output = CSV.open(import_file, "wb")
 output << import_headers
 
 # this csv has mappings between cms -> exhange fields
-# mapping = CSV.open('field_mapping.csv', headers: true).read
-mapping = CSV.open('field_mapping-full_export.csv', headers: true).read
+mapping = CSV.open('field_mapping.csv', headers: true).read
 
 export = File.open(export_file, encoding: "ISO-8859-1:UTF-8")
 export_headers = export.readline("\r").chomp.split(',') # have to specify \r since it is not default line ending
@@ -45,7 +41,7 @@ export.each_line("\r") do |line|
   contact = CSV::Row.new( export_headers, CSV.parse_line(fixed) )
   new_contact = CSV::Row.new(import_headers, [])
   mapping.each do |column|
-    new_contact[ column["Exchange Column"] ] = contact[ column['CMS DB Column'] ].to_s.strip # get rid of fields with nothing but blank space
+    new_contact[ column["Exchange Column"] ] = contact[ column['CMS DB Column'] ].to_s.strip # strip fields with nothing but blank space
   end
   output << new_contact
 end
