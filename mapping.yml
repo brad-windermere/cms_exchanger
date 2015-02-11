@@ -1,0 +1,37 @@
+First Name: firstname
+Last Name: lastname
+Company: company
+Job Title: com_name
+Business street: com_address
+Business City: com_city
+Business State: com_state
+Business Postal Code: com_zip
+Home street:
+  street_address:
+    - hsn
+    - street
+Home City: city
+Home State: state
+Home Postal Code:
+  zip_code:
+    - zip
+    - zip_4
+Home Country: country
+Other Street:
+  street_address:
+    - street2
+    - hsn2
+Other City: city2
+Other State: state2
+Other Postal Code:
+  zip_code:
+    - zip2
+    - zip_42
+Other Country: country2
+Business Fax: com_fax
+Business Phone: workphone
+Company Main Phone: com_phone
+Mobile Phone: mobilephone
+Primary Phone: homephone
+E-mail: email
+Notes: sp_note

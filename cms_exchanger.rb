@@ -2,13 +2,31 @@
 
 require 'optparse'
 require 'csv'
+require 'active_support/core_ext/hash/slice'
+require 'yaml'
+require 'pry'
 
 NEWLINE = "\r"
+mapping = YAML.load_file("mapping.yml")
 
 def error(usage, message=nil)
   puts message if message
   puts usage
   exit(-1) 
+end
+
+def street_address(fields)
+  fields.delete_if {|f| f == "0"} # hsn is sometimes 0
+  fields.join(' ').strip.squeeze(' ')
+end
+
+def zip_code(fields)
+  fields[1].empty? ? fields[0] : fields.join("-") # they will always be strings, no Nil values
+end
+
+def concat_fields(method, fields)
+  # use key string from hash as name of method to call
+  send(method, fields)
 end
 
 # configure command line options
@@ -38,9 +56,6 @@ import_headers = CSV.open("O365_import_template.csv").first
 output = CSV.open(import_file, "wb")
 output << import_headers
 
-# this csv has mappings between cms -> exhange fields
-mapping = CSV.open('field_mapping.csv', headers: true).read
-
 # try to guess text encoding. it's usually iso-8859-1 or us-ascii
 encoding = `file -b --mime-encoding #{export_file}`.chomp
 export = File.open(export_file, encoding: "#{encoding}:UTF-8")
@@ -52,9 +67,21 @@ export.each_line(NEWLINE) do |line|
   next if escaped.empty? # these crappy files have empty lines for some reason
   contact = CSV::Row.new( export_headers, CSV.parse_line(escaped) )
   new_contact = CSV::Row.new(import_headers, [])
-  mapping.each do |column|
-    new_contact[ column["Exchange Column"] ] = contact[ column['CMS DB Column'] ].to_s.strip # strip fields with nothing but blank space
+
+  mapping.each do |exchange_col, cms_col|
+    if cms_col.kind_of?(Hash)
+      # binding.pry
+      cms_col.each do |method, fields|
+        new_contact[exchange_col] = concat_fields( method, contact.to_hash.slice(*fields).values )
+      end
+    else
+      new_contact[exchange_col] = contact[cms_col].to_s.strip # strip fields with nothing but blank space
+    end
   end
+
+  # mapping.each do |column|
+  #   new_contact[ column["Exchange Column"] ] = contact[ column['CMS DB Column'] ].to_s.strip # strip fields with nothing but blank space
+  # end
   output << new_contact
 end
 
