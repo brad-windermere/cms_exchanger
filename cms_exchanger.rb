@@ -31,7 +31,10 @@ output << import_headers
 # this csv has mappings between cms -> exhange fields
 mapping = CSV.open('field_mapping.csv', headers: true).read
 
-export = File.open(export_file, encoding: "ISO-8859-1:UTF-8")
+# try to guess text encoding. it's usually iso-8859-1 or us-ascii
+encoding = `file -b --mime-encoding #{export_file}`.chomp
+puts encoding
+export = File.open(export_file, encoding: "#{encoding}:UTF-8")
 export_headers = export.readline("\r").chomp.split(',') # have to specify \r since it is not default line ending
 export.each_line("\r") do |line|
   # not only is there a \r to get rid of, but there is an extra comma for some reason!
