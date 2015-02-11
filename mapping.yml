@@ -1,3 +1,13 @@
+# Map Office 365 Exchange fields to CMS fields. The keys are Exchange,
+# their values are CMS. If a value contains a hash with an array as
+# it's value the app will treat that as a list of fields that need to
+# be concatenated. It will use the key of the hash as the name of a
+# method to call in order to concatenate them, e.g. zip_code(array).
+
+# All exchange fields are included as keys, even if we are not mapping
+# a CMS field to them. This is so the app can use them to build the
+# headers for the import file it generates to do the exchange import.
+
 Title: 
 First Name: firstname
 Middle Name: 
@@ -72,3 +82,38 @@ Notes: sp_note
 Office Location: 
 Other Address PO Box: 
 Web page: 
+
+# Thes are the remaining CMS fields that are not mapped to anything in Exchange
+
+# salutation
+# cm_firstname
+# cm_lastname
+# dob
+# cm_dob
+# cm_homephone
+# cm_workphone
+# cm_mobilephone
+# cm_email
+# entrydate
+# client_type
+# wedanniversary
+# dist_meth_1
+# dist_meth_2
+# dist_meth_3
+# dist_meth_4
+# dist_meth_5
+# trans
+# zip1 (exactly the same data as zip field)
+# active
+# cntc_how
+# tran_st
+# ln (there is no input field for this, looks like email display name in csv)
+# source_id
+# source_explain
+# purchasedate
+# client_type_2
+# client_type_3
+# client_type_4
+# client_type_5
+# LastTransDate
+# homepage
