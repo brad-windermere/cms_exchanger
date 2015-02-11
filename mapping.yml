@@ -1,15 +1,22 @@
+Title: 
 First Name: firstname
+Middle Name: 
 Last Name: lastname
+Suffix: 
 Company: company
+Department: 
 Job Title: com_name
 Business street: com_address
+Business Street 2: 
 Business City: com_city
 Business State: com_state
 Business Postal Code: com_zip
+Business Country: 
 Home street:
   street_address:
     - hsn
     - street
+Home Street 2: 
 Home City: city
 Home State: state
 Home Postal Code:
@@ -19,8 +26,9 @@ Home Postal Code:
 Home Country: country
 Other Street:
   street_address:
-    - street2
     - hsn2
+    - street2
+Other Street 2: 
 Other City: city2
 Other State: state2
 Other Postal Code:
@@ -28,10 +36,39 @@ Other Postal Code:
     - zip2
     - zip_42
 Other Country: country2
+Assistant's Phone: 
 Business Fax: com_fax
 Business Phone: workphone
+Business Phone 2: 
+Callback: 
 Company Main Phone: com_phone
+Home Fax: 
+Home Phone: 
+Home Phone 2: 
 Mobile Phone: mobilephone
+Other Fax: 
+Other Phone: 
+Pager: 
 Primary Phone: homephone
+Radio Phone: 
+TTY/TDD Phone: 
+Telex: 
+Assistant's Name: 
+Business Address PO Box: 
+Categories: 
+Children: 
 E-mail: email
+E-mail Type: 
+E-mail Display Name: 
+E-mail 2 Address: 
+E-mail 2 Type: 
+E-mail 2 Display Name: 
+E-mail 3 Address: 
+E-mail 3 Type: 
+E-mail 3 Display Name: 
+Home Address PO Box: 
+Manager's Name: 
 Notes: sp_note
+Office Location: 
+Other Address PO Box: 
+Web page: 
