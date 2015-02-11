@@ -4,7 +4,6 @@ require 'optparse'
 require 'csv'
 require 'active_support/core_ext/hash/slice'
 require 'yaml'
-require 'pry'
 
 NEWLINE = "\r"
 mapping = YAML.load_file("mapping.yml")
